@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hmmmmmm</title>
+  <style>
+    body {
+      background-image: url('bg.jpg');
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .btn {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .btn-green {
+      background-color: #4CAF50;
+      z-index: 1;
+    }
+
+    .btn-red {
+      background-color: #f44336;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #c2b8b8;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .modal-img {
+      text-align: center;
+    }
+
+    .title {
+      color: #fefefe;
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    .sub-title {
+      color: #fefefe;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .md-title {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">BẠN CÓ MUỐN NHẬN THƯỞNG TẾT KHÔNG ?</h1>
+  <p class="sub-title" id="sub-title">Năm nay covid nên chúng ta sẽ khảo sát online...</p>
+  <button class="btn btn-green" id="btnYes" onclick="click_yes()">Có ó ó ó ó ó ó ó</button>
+  <button class="btn btn-red" id="btnNo" onclick="click_no()">Đi làm vì đam mê thoai tiền bạc là quan trọng gì
+    <strong>( ͡° ͜ʖ ͡°)</strong></button>
+
+  <div id="modal-yes" class="modal">
+    <div class="modal-content">
+      <h1 class="md-title">CÔNG TY CHÂN THÀNH CẢM ƠN CÁC BẠN <img style="width:75px; height:75px" src="money.png"></h1>
+      <p>Bạn là một con nhân viên gương mẫu đi làm vì <strong>"ĐAM MÊ"</strong>, toàn tâm toàn ý hết lòng vì công việc
+        và sự phát
+        triển của công ty, công ty thật sự cần những người như bạn. <strong>Nếu bạn đã làm vì đam mê thì công ty cũng
+          không ép
+          bạn nhận tiền thưởng tết nữa</strong>. Chúc bạn một năm mới ấm no hạnh phúc bên gia đình và những người yêu
+        thương.</p>
+      <div class="modal-img">
+        <img src="cherr.gif" style="width:150px; height:150px">
+        <img src="no_money.gif" style="width:150px; height:150px">
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var count_click = 0;
+  function random_location(btn_id, first = true) {
+    var btn = document.getElementById(btn_id);
+    var btn2 = document.getElementById("btnNo");
+    var mw = window.innerWidth - btn.offsetWidth;
+    var mh = window.innerHeight - btn.offsetHeight;
+    let left = Math.floor(Math.random() * Math.floor(mw));
+    let top = Math.floor(Math.random() * Math.floor(mh));
+    var top_title = 0;
+
+    if (first) {
+      let subTitle = document.getElementById("sub-title");
+      top_title = subTitle.offsetTop + subTitle.offsetHeight;
+    }
+    if (top < top_title)
+      top += top_title;
+
+    btn.style.position = "absolute";
+    btn.style.left = left + 'px';
+    btn.style.top = top + 'px';
+  }
+
+  function random_btn_no() {
+    var btn = document.getElementById("btnNo");
+    let subTitle = document.getElementById("sub-title");
+    let top = subTitle.offsetTop + subTitle.offsetHeight;
+    var mw = window.innerWidth;
+    var mh = window.innerHeight;
+
+    btn.style.position = "absolute";
+    btn.style.left = Math.floor((mw - btn.offsetWidth) / 2) + 'px';
+    btn.style.top = Math.floor(top + 110) + 'px';
+  }
+  function click_yes() {
+    if (count_click == 6) {
+      var btn = document.getElementById("btnYes");
+      btn.innerHTML = "Đi làm vì đam mê thoai tiền bạc là quan trọng gì <strong>( ͡° ͜ʖ ͡°)</strong>";
+      btn.classList.remove('btn-green');
+      btn.classList.add('btn-red');
+    } else if (count_click > 6) {
+      click_no();
+    }
+    count_click += 1;
+    random_location("btnYes", false);
+  }
+  function click_no() {
+    var modal = document.getElementById("modal-yes");
+    modal.style.display = "block";
+  }
+  random_btn_no();
+  random_location("btnYes");
+</script>
+
+</html>
